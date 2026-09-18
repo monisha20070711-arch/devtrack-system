@@ -16,3 +16,6 @@ yarn-error.log*
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# Helper scripts
+push_to_github.bat
