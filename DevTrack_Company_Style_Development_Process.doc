@@ -1,0 +1,146 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+  <meta charset="utf-8">
+  <title>DevTrack System – Company-Style Project Development Process</title>
+  <!--[if gte mso 9]>
+  <xml>
+    <w:WordDocument>
+      <w:View>Print</w:View>
+      <w:Zoom>100</w:Zoom>
+      <w:DoNotOptimizeForBrowser/>
+    </w:WordDocument>
+  </xml>
+  <![endif]-->
+  <style>
+    body { font-family: 'Calibri', 'Arial', sans-serif; font-size: 11pt; line-height: 1.5; color: #1e293b; margin: 1in; }
+    h1 { font-size: 20pt; color: #4338ca; border-bottom: 2pt solid #6366f1; padding-bottom: 4pt; margin-top: 22pt; margin-bottom: 10pt; page-break-before: always; }
+    h1.first-title { page-break-before: avoid; }
+    h2 { font-size: 15pt; color: #1e1b4b; margin-top: 16pt; margin-bottom: 8pt; }
+    h3 { font-size: 12pt; color: #312e81; margin-top: 12pt; margin-bottom: 6pt; }
+    p { margin-bottom: 10pt; text-align: justify; }
+    table { width: 100%; border-collapse: collapse; margin-top: 12pt; margin-bottom: 12pt; }
+    th { background-color: #4338ca; color: #ffffff; font-weight: bold; padding: 8pt; border: 1pt solid #3730a3; text-align: left; }
+    td { padding: 7pt 8pt; border: 1pt solid #cbd5e1; vertical-align: top; }
+    tr:nth-child(even) { background-color: #f8fafc; }
+    code { font-family: 'Consolas', 'Courier New', monospace; font-size: 9.5pt; background-color: #f1f5f9; padding: 2pt 4pt; border: 1pt solid #e2e8f0; }
+    pre { font-family: 'Consolas', 'Courier New', monospace; font-size: 9.5pt; background-color: #0f172a; color: #f8fafc; padding: 12pt; border-radius: 4pt; margin-top: 10pt; margin-bottom: 10pt; white-space: pre-wrap; }
+    .cover { text-align: center; padding-top: 1.5in; padding-bottom: 1.5in; }
+    .cover-title { font-size: 30pt; font-weight: bold; color: #4338ca; margin-bottom: 12pt; }
+    .cover-subtitle { font-size: 15pt; color: #64748b; margin-bottom: 36pt; }
+    .box { border-left: 4pt solid #6366f1; background: #f8fafc; padding: 10pt 14pt; margin-top: 10pt; margin-bottom: 10pt; }
+  </style>
+</head>
+<body>
+
+  <!-- COVER PAGE -->
+  <div class="cover">
+    <div class="cover-title">DevTrack System</div>
+    <div class="cover-subtitle">Company-Style Project Development Process & Mayvel Technologies Interview Guide</div>
+    <br><br>
+    <table style="width: 75%; margin: 0 auto; text-align: left;">
+      <tr><td><strong>Student Developer:</strong></td><td>Monisha</td></tr>
+      <tr><td><strong>Degree & Course:</strong></td><td>B.Sc Information Technology (B.Sc IT)</td></tr>
+      <tr><td><strong>Target Company:</strong></td><td>Mayvel Technologies</td></tr>
+      <tr><td><strong>Project Title:</strong></td><td>DevTrack System – Issue & Task Management System</td></tr>
+      <tr><td><strong>Tech Stack:</strong></td><td>Node.js, Express.js, MySQL, Vanilla JavaScript, HTML5, CSS3, Chart.js</td></tr>
+      <tr><td><strong>GitHub Repository:</strong></td><td>https://github.com/monisha20070711-arch/devtrack-system</td></tr>
+      <tr><td><strong>Live Web Application:</strong></td><td>https://devtrack-system.onrender.com</td></tr>
+    </table>
+  </div>
+
+  <h1 class="first-title">1. Project Idea & Business Case</h1>
+  <p><strong>DevTrack System</strong> is a full-stack SaaS Issue & Task Management System built using Node.js, Express.js, MySQL, and Vanilla Web technologies. The name combines <em>Developer</em> and <em>Tracking</em>, symbolizing continuous oversight of software defects, feature enhancements, and system maintenance tasks across their entire lifecycle.</p>
+
+  <h1>2. Requirement Gathering</h1>
+  <p><strong>Functional Requirements:</strong> User registration, secure login with bcrypt password hashing, JWT session authorization, issue CRUD operations, developer task assignment, live debounced search, multi-filters (Status, Priority, Category), and Chart.js analytics charts.</p>
+  <p><strong>Non-Functional Requirements:</strong> Fast page rendering (<200ms API response), 10-round salted bcrypt security, parameterized SQL injection prevention, and 24/7 cloud hosting on Render containers.</p>
+
+  <h1>3. 3-Tier System Architecture</h1>
+  <pre>
+┌────────────────────────────────────────────────────────────────────────┐
+│                        TIER 1: PRESENTATION LAYER                      │
+│     Single Page Client (HTML5 / Vanilla CSS3 / Vanilla JavaScript)     │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │ HTTP Fetch JSON (JWT Bearer Header)
+┌───────────────────────────────────▼────────────────────────────────────┐
+│                        TIER 2: APPLICATION LAYER                       │
+│     Express Server ➔ CORS & JSON Parsers ➔ JWT Auth Middleware         │
+│     Express Routers ➔ Controllers (Auth, Issue, User, Dashboard)       │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │ Parameterized SQL Queries (mysql2)
+┌───────────────────────────────────▼────────────────────────────────────┐
+│                        TIER 3: DATABASE LAYER                          │
+│     MySQL Database Pool ➔ `users` Table ↔ `issues` Table (Foreign Keys)│
+└────────────────────────────────────────────────────────────────────────┘
+  </pre>
+
+  <h1>4. REST API Documentation</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Method</th>
+        <th>Endpoint</th>
+        <th>Auth?</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>POST</code></td><td><code>/api/auth/register</code></td><td>No</td><td>Registers a new user (Name, Email, Password, Role)</td></tr>
+      <tr><td><code>POST</code></td><td><code>/api/auth/login</code></td><td>No</td><td>Authenticates user and returns JWT token & profile</td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/auth/me</code></td><td>Yes</td><td>Fetches profile of currently logged-in user</td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/users</code></td><td>Yes</td><td>Lists all registered users for developer assignment</td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/issues</code></td><td>Yes</td><td>Lists issues (Supports search, status, priority, category, sortBy)</td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/issues/:id</code></td><td>Yes</td><td>Fetches detailed issue data with reporter & assignee JOINs</td></tr>
+      <tr><td><code>POST</code></td><td><code>/api/issues</code></td><td>Yes</td><td>Creates a new issue</td></tr>
+      <tr><td><code>PUT</code></td><td><code>/api/issues/:id</code></td><td>Yes</td><td>Updates existing issue fields</td></tr>
+      <tr><td><code>DELETE</code></td><td><code>/api/issues/:id</code></td><td>Yes</td><td>Deletes an issue permanently</td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/dashboard/stats</code></td><td>Yes</td><td>Aggregates summary counts and chart distributions</td></tr>
+    </tbody>
+  </table>
+
+  <h1>5. Database Design & SQL Schema</h1>
+  <pre>
+CREATE TABLE `users` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(150) NOT NULL UNIQUE,
+  `password` VARCHAR(255) NOT NULL,
+  `role` ENUM('Developer', 'Tester', 'Project Manager', 'Admin') NOT NULL DEFAULT 'Developer',
+  `avatar_url` VARCHAR(255) DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE `issues` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `title` VARCHAR(255) NOT NULL,
+  `description` TEXT,
+  `status` ENUM('Open', 'In Progress', 'Resolved') NOT NULL DEFAULT 'Open',
+  `priority` ENUM('Low', 'Medium', 'High') NOT NULL DEFAULT 'Medium',
+  `category` ENUM('Bug', 'Feature', 'Task', 'Improvement') NOT NULL DEFAULT 'Bug',
+  `reporter_id` INT DEFAULT NULL,
+  `assignee_id` INT DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT `fk_issues_reporter` FOREIGN KEY (`reporter_id`) REFERENCES `users` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `fk_issues_assignee` FOREIGN KEY (`assignee_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
+);
+  </pre>
+
+  <h1>6. Mayvel Technologies Interview Explanations</h1>
+
+  <h3>30-Second Elevator Pitch</h3>
+  <p>"DevTrack is a production-style full-stack issue and task management system built with Node.js, Express, MySQL, and Vanilla Web technologies. It allows engineering teams to track bug lifecycles, assign tasks to developers, monitor status transitions, and analyze workload distributions via interactive charts. It features JWT authentication, bcrypt encryption, and is deployed live on Render."</p>
+
+  <h3>2-Minute Spoken Answer</h3>
+  <p><em>"DevTrack is a production-style full-stack issue and task management system built with Node.js, Express, MySQL, and Vanilla Web technologies. In software projects, tracking bugs across informal chats or spreadsheets leads to unassigned defects and missed deadlines. DevTrack solves this by providing a centralized web dashboard where issues are created, assigned to team developers, and tracked through statuses—Open, In Progress, and Resolved.</em></p>
+
+  <p><em>Technically, I selected Node.js and Express for the REST API and Vanilla JavaScript for the client interface to ensure fast load times without framework overhead. For security, I implemented bcrypt password hashing and JSON Web Tokens for stateless authorization. On the database side, I designed a relational MySQL schema with foreign keys linking tasks to team members, using SQL JOINs to fetch reporter and assignee details in a single query. I also integrated Chart.js for real-time analytics and deployed the live project on Render."</em></p>
+
+  <br><hr><br>
+  <div style="text-align: center;">
+    <strong>Live Application:</strong> <a href="https://devtrack-system.onrender.com">https://devtrack-system.onrender.com</a><br>
+    <strong>GitHub Repository:</strong> <a href="https://github.com/monisha20070711-arch/devtrack-system">https://github.com/monisha20070711-arch/devtrack-system</a>
+  </div>
+
+</body>
+</html>

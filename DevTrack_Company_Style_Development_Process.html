@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DevTrack System – Company-Style Project Development Process & Mayvel Technologies Interview Guide</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+    @page {
+      size: A4;
+      margin: 20mm 15mm 20mm 15mm;
+      @bottom-right {
+        content: counter(page);
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 9pt;
+        color: #64748b;
+      }
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #1e293b;
+      line-height: 1.6;
+      font-size: 10.5pt;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+    }
+
+    @media print {
+      body { width: 100%; }
+      .page-break { page-break-before: always; }
+      .no-break { page-break-inside: avoid; }
+    }
+
+    .cover-page {
+      height: 95vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 3rem 2rem;
+      border-left: 8px solid #4338ca;
+      box-sizing: border-box;
+      page-break-after: always;
+    }
+
+    .cover-header { margin-top: 2rem; }
+    .cover-badge {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #4338ca;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 1.5rem;
+    }
+
+    .cover-title {
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: #0f172a;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .cover-subtitle {
+      font-size: 1.2rem;
+      color: #64748b;
+      font-weight: 500;
+      max-width: 600px;
+    }
+
+    .cover-meta {
+      background: #f8fafc;
+      padding: 1.75rem;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+
+    .meta-item label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #94a3b8;
+      letter-spacing: 0.05em;
+    }
+
+    .meta-item value {
+      display: block;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-top: 0.2rem;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #0f172a;
+      border-bottom: 2px solid #4338ca;
+      padding-bottom: 0.4rem;
+      margin-top: 2.25rem;
+      margin-bottom: 1.25rem;
+      page-break-after: avoid;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+      page-break-after: avoid;
+    }
+
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #334155;
+      margin-top: 1.2rem;
+      margin-bottom: 0.5rem;
+      page-break-after: avoid;
+    }
+
+    p { margin-bottom: 1rem; text-align: justify; }
+
+    ul, ol { margin-bottom: 1rem; padding-left: 1.5rem; }
+    li { margin-bottom: 0.35rem; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25rem 0;
+      font-size: 9.5pt;
+      page-break-inside: avoid;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: 700;
+      text-align: left;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid #cbd5e1;
+    }
+
+    td {
+      padding: 0.65rem 0.85rem;
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) { background-color: #f8fafc; }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5pt;
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 0.15rem 0.4rem;
+      border-radius: 4px;
+      border: 1px solid #e2e8f0;
+    }
+
+    pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 8.5pt;
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 1.25rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1rem 0;
+      line-height: 1.45;
+      page-break-inside: avoid;
+    }
+
+    .alert {
+      padding: 1rem 1.25rem;
+      border-radius: 8px;
+      margin: 1.25rem 0;
+      border-left: 4px solid #4338ca;
+      background: #f8fafc;
+      page-break-inside: avoid;
+    }
+
+    .alert-title {
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+      color: #3730a3;
+    }
+
+    .tag-impl {
+      display: inline-block;
+      background: #dcfce7;
+      color: #166534;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .tag-comp {
+      display: inline-block;
+      background: #e0f2fe;
+      color: #075985;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .qna-box {
+      background: #fafafa;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1rem;
+      page-break-inside: avoid;
+    }
+
+    .qna-question {
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 0.5rem;
+    }
+
+    .qna-answer {
+      color: #334155;
+      font-size: 9.5pt;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COVER PAGE -->
+  <div class="cover-page">
+    <div class="cover-header">
+      <span class="cover-badge">Mayvel Technologies Interview Preparation Guide</span>
+      <h1 class="cover-title">DevTrack System</h1>
+      <p class="cover-subtitle">Company-Style Project Development Process (Idea ➔ Architecture ➔ Code ➔ Database ➔ API ➔ Testing ➔ Cloud Deployment)</p>
+    </div>
+
+    <div class="cover-meta">
+      <div class="meta-item">
+        <label>Student Developer</label>
+        <value>Monisha</value>
+      </div>
+      <div class="meta-item">
+        <label>Degree & Course</label>
+        <value>B.Sc Information Technology (B.Sc IT)</value>
+      </div>
+      <div class="meta-item">
+        <label>Target Company</label>
+        <value>Mayvel Technologies</value>
+      </div>
+      <div class="meta-item">
+        <label>Tech Stack</label>
+        <value>Node.js, Express, MySQL, Vanilla JS</value>
+      </div>
+      <div class="meta-item">
+        <label>GitHub Repository</label>
+        <value>github.com/monisha20070711-arch/devtrack-system</value>
+      </div>
+      <div class="meta-item">
+        <label>Live Web Application URL</label>
+        <value>devtrack-system.onrender.com</value>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <h1>Table of Contents</h1>
+  <ol style="columns: 2; column-gap: 2rem; font-size: 9.5pt;">
+    <li>Project Idea & Business Case</li>
+    <li>Requirement Gathering</li>
+    <li>Project Planning & Sprints</li>
+    <li>System Architecture (3-Tier MVC)</li>
+    <li>UI/UX Design & Component Flow</li>
+    <li>Database Design & ER Diagram</li>
+    <li>Backend Development (Node/Express)</li>
+    <li>Frontend Development (Vanilla JS SPA)</li>
+    <li>Authentication & Security</li>
+    <li>API Development & Traceability</li>
+    <li>CRUD Process Walkthrough</li>
+    <li>Git & Version Control Workflow</li>
+    <li>Testing Matrix & Methodology</li>
+    <li>Bug Fixing Lifecycle</li>
+    <li>Code Review & Quality Standards</li>
+    <li>Cloud Deployment (Render & MySQL)</li>
+    <li>Complete End-to-End Production Flow</li>
+    <li>Real Company Team Roles</li>
+    <li>Agile / Scrum Framework</li>
+    <li>Requirement ➔ Test Matrix</li>
+    <li>Complete User Journey</li>
+    <li>Problems & Solutions Log</li>
+    <li>Performance & Scalability</li>
+    <li>Maintenance & Monitoring</li>
+    <li>Future Development Roadmap</li>
+    <li>Final Interview Explanations (30s, 1m, 2m, 5m)</li>
+    <li>40 Mayvel Technologies Interview Q&A</li>
+  </ol>
+
+  <div class="page-break"></div>
+
+  <!-- SECTION 1 -->
+  <h1>1. Project Idea & Business Case</h1>
+  <p><span class="tag-impl">Implemented in Project</span></p>
+  <p><strong>DevTrack System</strong> is a full-stack SaaS Issue & Task Management System built using Node.js, Express.js, MySQL, and Vanilla Web technologies (HTML5, CSS3, ES6+ JavaScript). The name combines <em>Developer</em> and <em>Tracking</em>, symbolizing continuous oversight of software defects, feature enhancements, and system maintenance tasks across their entire lifecycle.</p>
+  
+  <h3>Real-World Problem Addressed</h3>
+  <p>In modern software engineering, managing bug reports via unorganized channels (email threads, instant messaging, or flat spreadsheets) results in unassigned tasks, lost defect histories, and zero visibility into team capacity. DevTrack solves this by providing a single centralized dashboard where issues are logged, assigned to specific engineers, categorized, prioritized, and tracked visually until resolution.</p>
+
+  <!-- SECTION 2 -->
+  <h1>2. Requirement Gathering</h1>
+  <p><span class="tag-impl">Implemented in Project</span></p>
+  
+  <h3>Functional Requirements</h3>
+  <ul>
+    <li><strong>User Authentication</strong>: User registration, secure login with bcrypt password hashing, and JWT stateless session authorization.</li>
+    <li><strong>Issue CRUD</strong>: Create new issues, view full issue details, edit existing issue attributes (status, assignee, priority), and delete issues.</li>
+    <li><strong>Developer Assignment</strong>: Assign tasks to specific registered developers from team user roster.</li>
+    <li><strong>Filtering & Live Search</strong>: Instant debounced keyword search on issue titles/descriptions; filtering by Status (Open, In Progress, Resolved), Priority (High, Medium, Low), Category (Bug, Feature, Task, Improvement), and Sorting (Newest, Oldest, Priority, Title).</li>
+    <li><strong>Dashboard Visual Analytics</strong>: Real-time stat metrics cards and interactive Status Donut Chart & Priority Bar Chart via Chart.js.</li>
+  </ul>
+
+  <h3>Non-Functional Requirements</h3>
+  <ul>
+    <li><strong>Performance</strong>: Under 200ms API response time using native Node.js asynchronous I/O and Vanilla JS client rendering without framework overhead.</li>
+    <li><strong>Security</strong>: 10-round salted bcrypt password hashing, JWT header verification, parameterized SQL query injection prevention.</li>
+    <li><strong>Availability & Cloud Accessibility</strong>: 24/7 public accessibility hosted on Render Linux containers (`devtrack-system.onrender.com`).</li>
+  </ul>
+
+  <!-- SECTION 3 -->
+  <h1>3. Project Planning & Sprints</h1>
+  <p><span class="tag-impl">Implemented in Student Project</span> vs <span class="tag-comp">Company Practice</span></p>
+  <p>In a commercial software company, projects are broken into 2-week Agile Sprints managed via Jira or Linear. For DevTrack, development was organized into 4 logical phases:</p>
+  
+  <table>
+    <thead>
+      <tr>
+        <th>Sprint / Phase</th>
+        <th>Focus Area</th>
+        <th>Student Implementation (DevTrack)</th>
+        <th>Company Standard Practice</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Sprint 1</strong></td>
+        <td>Architecture & Database</td>
+        <td>Designed `users` and `issues` MySQL schema and connection pool (`db.js`).</td>
+        <td>Architectural spike, ERD review, DB migration pipeline setup.</td>
+      </tr>
+      <tr>
+        <td><strong>Sprint 2</strong></td>
+        <td>Backend REST API</td>
+        <td>Built Express routers, controllers, models, bcrypt hashing, and JWT auth middleware.</td>
+        <td>Swagger/OpenAPI spec authoring, unit test coverage (>80%).</td>
+      </tr>
+      <tr>
+        <td><strong>Sprint 3</strong></td>
+        <td>Frontend SPA & UI</td>
+        <td>Created Glassmorphic design system (`style.css`), Vanilla JS modules, Chart.js integrations.</td>
+        <td>Figma wireframe design system component library build.</td>
+      </tr>
+      <tr>
+        <td><strong>Sprint 4</strong></td>
+        <td>Integration & Cloud Launch</td>
+        <td>Connected Fetch API to backend, created `.gitignore`, pushed to GitHub, deployed to Render.</td>
+        <td>Staging QA verification, automated CI/CD deployment pipeline.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 4 -->
+  <h1>4. System Architecture (3-Tier MVC)</h1>
+  <p><span class="tag-impl">Implemented in Project</span></p>
+  <p>DevTrack adheres to a clean 3-Tier Model-View-Controller (MVC) software architecture:</p>
+
+  <pre>
+┌────────────────────────────────────────────────────────────────────────┐
+│                        TIER 1: PRESENTATION LAYER                      │
+│     Single Page Client (HTML5 / Vanilla CSS3 / Vanilla JavaScript)     │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │ HTTP Fetch JSON (JWT Bearer Header)
+┌───────────────────────────────────▼────────────────────────────────────┐
+│                        TIER 2: APPLICATION LAYER                       │
+│     Express Server ➔ CORS & JSON Parsers ➔ JWT Auth Middleware         │
+│     Express Routers ➔ Controllers (Auth, Issue, User, Dashboard)       │
+└───────────────────────────────────┬────────────────────────────────────┘
+                                    │ Parameterized SQL Queries (mysql2)
+┌───────────────────────────────────▼────────────────────────────────────┐
+│                        TIER 3: DATABASE LAYER                          │
+│     MySQL Database Pool ➔ `users` Table ↔ `issues` Table (Foreign Keys)│
+└────────────────────────────────────────────────────────────────────────┘
+  </pre>
+
+  <!-- SECTION 5 -->
+  <h1>5. UI/UX Design & Component Flow</h1>
+  <p><span class="tag-impl">Implemented in Project</span></p>
+  <ul>
+    <li><strong>Auth Portal</strong>: Glassmorphic tab card allowing instant switching between Sign In and Create Account forms.</li>
+    <li><strong>Navigation</strong>: Left sidebar navigation drawer with active view indicator and mobile drawer toggle button.</li>
+    <li><strong>Toolbar</strong>: Filter bar containing live search input, Status filter select, Priority filter select, Category filter select, and Sort select.</li>
+    <li><strong>Modals</strong>: Form modal for Creating/Editing issues, Issue Details view modal, and custom Delete confirmation dialog.</li>
+    <li><strong>Feedback States</strong>: Animated toast banners, empty state graphics when search returns 0 rows, loading button states.</li>
+  </ul>
+
+  <!-- SECTION 6 -->
+  <h1>6. Database Design & ER Diagram</h1>
+  <p><span class="tag-impl">Implemented in Project</span></p>
+  <p>The relational MySQL schema comprises two core tables defined in <code>database/schema.sql</code>:</p>
+
+  <pre>
+┌────────────────────────────────────────┐       ┌────────────────────────────────────────┐
+│                 USERS                  │       │                 ISSUES                 │
+├────────────────────────────────────────┤       ├────────────────────────────────────────┤
+│ PK  id          INT AUTO_INCREMENT     │       │ PK  id          INT AUTO_INCREMENT     │
+│     name        VARCHAR(100)           │       │     title       VARCHAR(255)           │
+│ UK  email       VARCHAR(150)           │       │     description TEXT                   │
+│     password    VARCHAR(255)           │       │     status      ENUM                   │
+│     role        ENUM                   │  ───┐ │     priority    ENUM                   │
+│     avatar_url  VARCHAR(255)           │     │ │     category    ENUM                   │
+│     created_at  TIMESTAMP              │     └─► FK  reporter_id INT REFERENCES users(id) │
+└────────────────────────────────────────┘       ├─► FK  assignee_id INT REFERENCES users(id) │
+                                                 │     created_at  TIMESTAMP              │
+                                                 │     updated_at  TIMESTAMP              │
+                                                 └────────────────────────────────────────┘
+  </pre>
+
+  <h3>SQL JOIN Query Example (`issueModel.js`)</h3>
+  <pre><code>SELECT 
+  i.id, i.title, i.description, i.status, i.priority, i.category,
+  i.reporter_id, i.assignee_id, i.created_at, i.updated_at,
+  r.name as reporter_name, r.email as reporter_email,
+  a.name as assignee_name, a.email as assignee_email, a.avatar_url as assignee_avatar
+FROM issues i
+LEFT JOIN users r ON i.reporter_id = r.id
+LEFT JOIN users a ON i.assignee_id = a.id
+WHERE 1=1 AND i.status = ?
+ORDER BY i.created_at DESC;</code></pre>
+
+  <div class="page-break"></div>
+
+  <!-- SECTION 7 -->
+  <h1>7. Backend Development (Node/Express)</h1>
+  <p><span class="tag-impl">Implemented in Project</span></p>
+  <ul>
+    <li><strong>`server.js`</strong>: Entry point. Configures CORS, JSON body parser, static serving of `/frontend`, mounts routes under `/api`, handles 404/500 errors, and listens on `0.0.0.0:PORT`.</li>
+    <li><strong>`config/db.js`</strong>: Connection pool manager using `mysql2/promise`. Auto-creates database schema and sample data on startup. Includes clean fallback data engine if MySQL service is offline.</li>
+    <li><strong>`middleware/authMiddleware.js`</strong>: Intercepts protected requests, extracts JWT from `Authorization: Bearer <token>` header, verifies validity using `JWT_SECRET`, and attaches `req.user`.</li>
+    <li><strong>`models/issueModel.js`</strong>: Formulates parameterized SQL queries (`?`) with `LEFT JOIN` on `users` table twice to fetch reporter and assignee metadata safely.</li>
+  </ul>
+
+  <!-- SECTION 8 -->
+  <h1>8. Frontend Development (Vanilla JS SPA)</h1>
+  <p><span class="tag-impl">Implemented in Project</span></p>
+  <ul>
+    <li><strong>`config.js`</strong>: Dynamically computes `API_BASE_URL` as `${window.location.origin}/api`, ensuring seamless operation locally or on cloud servers.</li>
+    <li><strong>`api.js`</strong>: Handles HTTP GET, POST, PUT, DELETE requests. Automatically attaches `Authorization: Bearer <token>` and handles 401 unauthorized session expiration.</li>
+    <li><strong>`auth.js`</strong>: Handles login/register tab switching, token persistence in `localStorage`, and profile rendering.</li>
+    <li><strong>`issues.js`</strong>: Manages table rendering, modal data population, live debounced search, multi-filters, and delete confirmations.</li>
+    <li><strong>`charts.js`</strong>: Manages Chart.js doughnut and bar chart instances.</li>
+  </ul>
+
+  <!-- SECTION 9 -->
+  <h1>9. Authentication & Security</h1>
+  <p><span class="tag-impl">Implemented in Project</span></p>
+  <ol>
+    <li><strong>Registration</strong>: User submits credentials. Backend generates a 10-round salted bcrypt hash using <code>bcrypt.hash(password, 10)</code> and stores it in MySQL.</li>
+    <li><strong>Login Authentication</strong>: Backend retrieves user by email and compares entered password using <code>bcrypt.compare()</code>.</li>
+    <li><strong>Token Generation</strong>: Upon verification, backend signs a JWT payload containing <code>{ id, email, name, role }</code> using <code>JWT_SECRET</code> valid for 7 days.</li>
+    <li><strong>Protected Requests</strong>: Client stores token in <code>localStorage</code> and attaches it to request headers as <code>Authorization: Bearer &lt;token&gt;</code>.</li>
+    <li><strong>Verification Middleware</strong>: <code>authMiddleware.js</code> verifies token validity before passing control to API controllers.</li>
+  </ol>
+
+  <!-- SECTION 10 -->
+  <h1>10. REST API Documentation & Request Trace</h1>
+  <p><span class="tag-impl">Implemented in Project</span></p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Method</th>
+        <th>Endpoint</th>
+        <th>Auth?</th>
+        <th>Request Data</th>
+        <th>Response Payload</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>POST</code></td><td><code>/api/auth/register</code></td><td>No</td><td><code>{ name, email, password, role }</code></td><td>HTTP 201: <code>{ success, token, user }</code></td></tr>
+      <tr><td><code>POST</code></td><td><code>/api/auth/login</code></td><td>No</td><td><code>{ email, password }</code></td><td>HTTP 200: <code>{ success, token, user }</code></td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/auth/me</code></td><td>Yes</td><td>Header: Bearer Token</td><td>HTTP 200: <code>{ success, user }</code></td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/users</code></td><td>Yes</td><td>Header: Bearer Token</td><td>HTTP 200: <code>{ success, count, users }</code></td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/issues</code></td><td>Yes</td><td>Query Params: search, status, priority, category, sortBy</td><td>HTTP 200: <code>{ success, count, issues }</code></td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/issues/:id</code></td><td>Yes</td><td>Header: Bearer Token</td><td>HTTP 200: <code>{ success, issue }</code></td></tr>
+      <tr><td><code>POST</code></td><td><code>/api/issues</code></td><td>Yes</td><td><code>{ title, description, status, priority, category, assignee_id }</code></td><td>HTTP 201: <code>{ success, message, issue }</code></td></tr>
+      <tr><td><code>PUT</code></td><td><code>/api/issues/:id</code></td><td>Yes</td><td><code>{ title, description, status, priority, category, assignee_id }</code></td><td>HTTP 200: <code>{ success, message, issue }</code></td></tr>
+      <tr><td><code>DELETE</code></td><td><code>/api/issues/:id</code></td><td>Yes</td><td>Header: Bearer Token</td><td>HTTP 200: <code>{ success, message }</code></td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/dashboard/stats</code></td><td>Yes</td><td>Header: Bearer Token</td><td>HTTP 200: <code>{ success, data: { summary, statusDist, priorityDist, recent } }</code></td></tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 11 -->
+  <h1>11. CRUD Process Walkthrough</h1>
+  <p><span class="tag-impl">Implemented in Project</span></p>
+  <ul>
+    <li><strong>Create (POST /api/issues)</strong>: Inserts new task record into `issues` table with title, description, category, status, priority, reporter ID, and assignee ID.</li>
+    <li><strong>Read (GET /api/issues & GET /api/issues/:id)</strong>: Executes SQL query with `LEFT JOIN` on `users` table to fetch issue details alongside reporter and assignee names/avatars. Supports live keyword search, status filtering, and priority sorting.</li>
+    <li><strong>Update (PUT /api/issues/:id)</strong>: Updates existing issue fields in database.</li>
+    <li><strong>Delete (DELETE /api/issues/:id)</strong>: Executes SQL `DELETE FROM issues WHERE id = ?` to remove task records.</li>
+  </ul>
+
+  <!-- SECTION 12 -->
+  <h1>12. Git & Version Control Workflow</h1>
+  <p><span class="tag-impl">Implemented in Project</span> vs <span class="tag-comp">Company Practice</span></p>
+  <ul>
+    <li><strong>Student Project Setup</strong>: Single `main` production branch pushed directly to GitHub (`monisha20070711-arch/devtrack-system`). Configured `.gitignore` protecting secrets (`node_modules/`, `.env`, logs).</li>
+    <li><strong>Recommended Company Workflow</strong>: Feature branch workflow (`feature/issue-filters` ➔ `develop` ➔ `main`), Pull Requests with peer code reviews, automated CI/CD checks before merge.</li>
+  </ul>
+
+  <!-- SECTION 13 -->
+  <h1>13. Testing Matrix & Methodology</h1>
+  <p><span class="tag-impl">Implemented in Project</span></p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Test ID</th>
+        <th>Feature</th>
+        <th>Input Scenario</th>
+        <th>Expected Result</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>TC-01</td><td>User Registration</td><td>Name, Email, Password, Role</td><td>HTTP 201, User created, JWT token returned</td><td>PASSED ✅</td></tr>
+      <tr><td>TC-02</td><td>User Login (Valid)</td><td>`monisha20070711@gmail.com` / `password123`</td><td>HTTP 200, JWT token stored, Dashboard loaded</td><td>PASSED ✅</td></tr>
+      <tr><td>TC-03</td><td>User Login (Invalid)</td><td>`wrong@email.com` / `wrongpass`</td><td>HTTP 401, Toast error displayed</td><td>PASSED ✅</td></tr>
+      <tr><td>TC-04</td><td>Issue Creation</td><td>Title, Description, Priority, Assignee</td><td>HTTP 201, Issue inserted, Table updated</td><td>PASSED ✅</td></tr>
+      <tr><td>TC-05</td><td>Issue Update</td><td>Changed Status to 'Resolved'</td><td>HTTP 200, Badge turns green, Stat cards update</td><td>PASSED ✅</td></tr>
+      <tr><td>TC-06</td><td>Issue Deletion</td><td>Click Delete on Issue #1</td><td>Modal prompt, HTTP 200, Row removed</td><td>PASSED ✅</td></tr>
+      <tr><td>TC-07</td><td>Live Search</td><td>Query "OAuth"</td><td>Table filters to matching title/description rows</td><td>PASSED ✅</td></tr>
+      <tr><td>TC-08</td><td>Theme Switch</td><td>Click Theme Toggle button</td><td>`data-theme` switches, preference saved</td><td>PASSED ✅</td></tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 14 -->
+  <h1>14. Bug Fixing Lifecycle</h1>
+  <p><span class="tag-impl">Implemented in Project</span></p>
+  <pre>
+1. BUG REPORTED ➔ e.g., Primary key conflict in seed users
+   │
+2. REPRODUCE ➔ Running server throws primary key duplicate constraint error
+   │
+3. ROOT CAUSE ➔ `seed.sql` and `db.js` had duplicate ID 2 for Alex Morgan and Sarah Chen
+   │
+4. FIX IMPLEMENTED ➔ Updated user IDs to sequential primary keys (1: Monisha, 2: Alex, 3: Sarah, 4: Marcus, 5: Emily)
+   │
+5. VERIFICATION ➔ Re-ran `node backend/server.js`, verified table creation & login success
+   │
+6. CLOSE ➔ Pushed fix to GitHub repository
+  </pre>
+
+  <div class="page-break"></div>
+
+  <!-- SECTION 15 -->
+  <h1>15. Code Review & Quality Standards</h1>
+  <p><span class="tag-comp">Company Practice</span></p>
+  <p>In a commercial software company, code updates must pass automated static analysis (ESLint), unit testing (Jest/Mocha), and human peer code reviews via Pull Requests before merging to `main`. In DevTrack, code quality was assured through modular file structure, parameterized SQL queries, and centralized error middleware.</p>
+
+  <!-- SECTION 16 -->
+  <h1>16. Cloud Deployment (Render & MySQL)</h1>
+  <p><span class="tag-impl">Implemented in Project</span></p>
+  <ul>
+    <li><strong>Platform</strong>: Render Web Service (Linux Node.js Container).</li>
+    <li><strong>GitHub Repository</strong>: `https://github.com/monisha20070711-arch/devtrack-system`</li>
+    <li><strong>Live URL</strong>: `https://devtrack-system.onrender.com`</li>
+    <li><strong>Build & Start Commands</strong>: `npm install` and `node backend/server.js` (`npm start`).</li>
+    <li><strong>Host Binding</strong>: Express server listens on host `0.0.0.0` and `process.env.PORT`.</li>
+  </ul>
+
+  <!-- SECTION 17 -->
+  <h1>17. Complete End-to-End Production Flow</h1>
+  <pre>
+IDEA ➔ REQUIREMENT GATHERING ➔ MVC ARCHITECTURE DESIGN ➔ DATABASE SCHEMA (schema.sql)
+  │
+  ▼
+EXPRESS BACKEND (server.js, db.js, authController.js, issueController.js)
+  │
+  ▼
+VANILLA JS FRONTEND (index.html, style.css, api.js, auth.js, issues.js, charts.js)
+  │
+  ▼
+JWT AUTHENTICATION & BCRYPT ENCRYPTION ➔ LOCAL VERIFICATION (http://localhost:5000)
+  │
+  ▼
+GIT VERSION CONTROL (.gitignore, GitHub monisha20070711-arch/devtrack-system)
+  │
+  ▼
+CLOUD DEPLOYMENT (Render Web Service ➔ https://devtrack-system.onrender.com)
+  </pre>
+
+  <!-- SECTION 18 -->
+  <h1>18. Real Company Team Roles</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Company Team Role</th>
+        <th>Industry Responsibility</th>
+        <th>Handled by Monisha in DevTrack?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Product Manager</td><td>Defines product vision, requirements, user stories.</td><td>YES — Defined scope & features. ✅</td></tr>
+      <tr><td>UI/UX Designer</td><td>Figma mockups, glassmorphic design system.</td><td>YES — Created `style.css` & layout. ✅</td></tr>
+      <tr><td>Frontend Developer</td><td>Client SPA JS logic, Fetch API, DOM manipulation.</td><td>YES — Authored all JS modules. ✅</td></tr>
+      <tr><td>Backend Developer</td><td>Express API routes, controllers, JWT auth, middleware.</td><td>YES — Authored complete Node backend. ✅</td></tr>
+      <tr><td>Database Admin</td><td>SQL schema design, foreign keys, query tuning.</td><td>YES — Wrote `schema.sql` & JOINs. ✅</td></tr>
+      <tr><td>QA Engineer</td><td>Manual test execution, API testing.</td><td>YES — Tested CRUD & auth flows. ✅</td></tr>
+      <tr><td>DevOps Engineer</td><td>Git repository setup, Render deployment.</td><td>YES — Configured Render & GitHub. ✅</td></tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 19 -->
+  <h1>19. Agile / Scrum Framework</h1>
+  <p><span class="tag-comp">Company Practice</span></p>
+  <p>In companies, software is built in 2-week iterations called Sprints. Daily Stand-up meetings review progress, and Sprint Demos showcase completed features to stakeholders. DevTrack features were structured logically into 4 sprint iterations.</p>
+
+  <!-- SECTION 20 -->
+  <h1>20. Requirement ➔ Test Matrix (5 Core Features)</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Requirement</th>
+        <th>Feature</th>
+        <th>Frontend</th>
+        <th>API Endpoint</th>
+        <th>Backend Controller</th>
+        <th>Database Query</th>
+        <th>Test Case</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Secure Authentication</td>
+        <td>User Login</td>
+        <td>`auth.js`</td>
+        <td>`POST /api/auth/login`</td>
+        <td>`authController.login`</td>
+        <td>`SELECT * FROM users WHERE email=?`</td>
+        <td>TC-02 (Passed)</td>
+      </tr>
+      <tr>
+        <td>Issue Logging</td>
+        <td>Create Issue</td>
+        <td>`issues.js`</td>
+        <td>`POST /api/issues`</td>
+        <td>`issueController.createIssue`</td>
+        <td>`INSERT INTO issues (...)`</td>
+        <td>TC-04 (Passed)</td>
+      </tr>
+      <tr>
+        <td>Task Lifecycle</td>
+        <td>Update Status</td>
+        <td>`issues.js`</td>
+        <td>`PUT /api/issues/:id`</td>
+        <td>`issueController.updateIssue`</td>
+        <td>`UPDATE issues SET status=?`</td>
+        <td>TC-05 (Passed)</td>
+      </tr>
+      <tr>
+        <td>Live Filtering</td>
+        <td>Search Issues</td>
+        <td>`issues.js`</td>
+        <td>`GET /api/issues?search=`</td>
+        <td>`issueController.getIssues`</td>
+        <td>`WHERE title LIKE ?`</td>
+        <td>TC-07 (Passed)</td>
+      </tr>
+      <tr>
+        <td>Workload Metrics</td>
+        <td>Visual Charts</td>
+        <td>`charts.js`</td>
+        <td>`GET /api/dashboard/stats`</td>
+        <td>`dashboardController.getDashboardStats`</td>
+        <td>`SELECT status, COUNT(*) GROUP BY status`</td>
+        <td>TC-08 (Passed)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 21 -->
+  <h1>21. Complete User Journey</h1>
+  <ol>
+    <li>User accesses `https://devtrack-system.onrender.com`.</li>
+    <li>System presents Auth Portal. User enters `monisha20070711@gmail.com` / `password123`.</li>
+    <li>Backend verifies bcrypt hash, returns JWT token. Token stored in `localStorage`.</li>
+    <li>System redirects to Overview Dashboard, fetching stats and drawing Donut and Bar charts.</li>
+    <li>User navigates to Issue Management table, filters by High priority.</li>
+    <li>User opens Create Issue Modal, logs bug, assigns to developer Sarah Chen.</li>
+    <li>System posts data to Express REST API, saves record to MySQL database, and displays success toast banner.</li>
+    <li>User logs out cleanly.</li>
+  </ol>
+
+  <!-- SECTION 22 -->
+  <h1>22. Problems & Solutions Log</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Development Problem</th>
+        <th>Root Cause</th>
+        <th>Technical Solution</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Port 5000 Conflict (`EADDRINUSE`)</td>
+        <td>Previous background node process occupied port 5000.</td>
+        <td>Added port conflict event handler in `server.js` to switch dynamically to `5001`.</td>
+      </tr>
+      <tr>
+        <td>Offline Database Crash</td>
+        <td>Server crashed when MySQL service was offline locally.</td>
+        <td>Built auto-initializing data fallback engine inside `config/db.js`.</td>
+      </tr>
+      <tr>
+        <td>Duplicate Seed User IDs</td>
+        <td>Seed SQL had duplicate ID 2 for Alex Morgan and Sarah Chen.</td>
+        <td>Re-indexed primary key IDs sequentially (1 to 5) across `seed.sql` and `db.js`.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- SECTION 23 -->
+  <h1>23. Performance & Scalability</h1>
+  <p><span class="tag-comp">Future Company Optimization</span></p>
+  <ul>
+    <li><strong>Horizontal Scaling</strong>: Deploy multiple Express instances behind an AWS Application Load Balancer (ALB).</li>
+    <li><strong>Caching Layer</strong>: Integrate Redis in front of MySQL to cache dashboard stats query responses.</li>
+    <li><strong>Database Scaling</strong>: Configure MySQL primary-replica replication for high read query volume.</li>
+  </ul>
+
+  <!-- SECTION 24 -->
+  <h1>24. Maintenance & Monitoring</h1>
+  <p><span class="tag-impl">Implemented in Project</span></p>
+  <ul>
+    <li><strong>Application Logging</strong>: Clean HTTP endpoint logging in Express console.</li>
+    <li><strong>Health Monitoring</strong>: Render live container status monitoring (`Deploy succeeded | Live`).</li>
+  </ul>
+
+  <!-- SECTION 25 -->
+  <h1>25. Future Development Roadmap</h1>
+  <ul>
+    <li>Integrate Multer middleware for screenshot attachments.</li>
+    <li>Integrate Nodemailer for automated assignment email alerts.</li>
+    <li>Add PDF/CSV report export for filtered issue tables.</li>
+  </ul>
+
+  <div class="page-break"></div>
+
+  <!-- SECTION 26 -->
+  <h1>26. Final Interview Explanations (30s, 1m, 2m, 5m)</h1>
+
+  <h3>30-Second Interview Pitch</h3>
+  <p>"DevTrack is a full-stack SaaS Issue & Task Management System built with Node.js, Express, MySQL, and Vanilla Web technologies. It enables software teams to track bug lifecycles, assign tasks to developers, update status transitions, and analyze workload metrics via interactive charts. It features JWT authentication, bcrypt encryption, and is deployed live on Render."</p>
+
+  <h3>1-Minute Interview Pitch</h3>
+  <p>"I developed DevTrack to solve problem visibility in software teams. The backend uses Node.js and Express following an MVC pattern, serving a single-page Vanilla JS interface statically. Authentication uses bcrypt password hashing and JSON Web Tokens. Database queries interact with MySQL via connection pooling using SQL JOINs between issues and user rosters. I built live keyword search, status and priority filters, and visual analytics charts using Chart.js. The project is version-controlled on GitHub and deployed live on Render."</p>
+
+  <h3>2-Minute Spoken Interview Answer</h3>
+  <p><em>"DevTrack is a production-style full-stack issue and task management system built with Node.js, Express, MySQL, and Vanilla Web technologies. In software projects, tracking bugs across informal chats or spreadsheets leads to unassigned defects and missed deadlines. DevTrack solves this by providing a centralized web dashboard where issues are created, assigned to team developers, and tracked through statuses—Open, In Progress, and Resolved.</em></p>
+
+  <p><em>Technically, I selected Node.js and Express for the REST API and Vanilla JavaScript for the client interface to ensure fast load times without framework overhead. For security, I implemented bcrypt password hashing and JSON Web Tokens for stateless authorization. On the database side, I designed a relational MySQL schema with foreign keys linking tasks to team members, using SQL JOINs to fetch reporter and assignee details in a single query. I also integrated Chart.js for real-time analytics and deployed the live project on Render."</em></p>
+
+  <!-- SECTION 27 -->
+  <h1>27. 40 Mayvel Technologies Interview Q&A</h1>
+
+  <div class="qna-box"><strong>Q1: Why did you build DevTrack System?</strong><br>To solve problem visibility in software teams by centralizing bug tracking, developer assignments, status updates, and workload metrics into a secure web dashboard.</div>
+
+  <div class="qna-box"><strong>Q2: What is your technology stack?</strong><br>Node.js, Express.js, MySQL (`mysql2/promise`), Vanilla JavaScript, HTML5, CSS3, Chart.js, bcrypt, JWT, and Render.</div>
+
+  <div class="qna-box"><strong>Q3: How does authentication work?</strong><br>Passwords are hashed with 10-round bcrypt. Login returns a signed JWT token valid for 7 days. Client attaches token as `Authorization: Bearer <token>` for protected route access.</div>
+
+  <div class="qna-box"><strong>Q4: How do you prevent SQL Injection?</strong><br>All queries use parameterized statement placeholders (`?`) with `mysql2/promise`, ensuring inputs are safely sanitized.</div>
+
+  <div class="qna-box"><strong>Q5: How do SQL JOIN queries improve performance?</strong><br>Using `LEFT JOIN` on `users` twice fetches issue metadata, reporter name, and assignee name/avatar in a single database query, avoiding N+1 query overhead.</div>
+
+  <div class="qna-box"><strong>Q6: Why did you choose Vanilla JS over React?</strong><br>Vanilla JS demonstrates strong fundamental core skills in DOM manipulation, Async/Await, and Fetch API without framework dependency.</div>
+
+  <div class="qna-box"><strong>Q7: What is the purpose of connection pooling?</strong><br>Reuses active MySQL connection instances rather than opening and closing new connections on every HTTP request.</div>
+
+  <div class="qna-box"><strong>Q8: How is the app deployed on Render?</strong><br>Deployed as a Linux Node.js container listening on `0.0.0.0:PORT`, running `npm start` (`node backend/server.js`).</div>
+
+  <div class="qna-box"><strong>Q9: How do stat counters stay in sync?</strong><br>Frontend calls `GET /api/dashboard/stats`, backend calculates aggregate counts from MySQL, and UI DOM elements update dynamically.</div>
+
+  <div class="qna-box"><strong>Q10: What HTTP status codes do you use?</strong><br>200 OK for successful requests, 201 Created for new resources, 400 Bad Request for validation errors, 401 Unauthorized for auth failures, 404 Not Found, 409 Conflict for duplicate emails, and 500 Internal Error.</div>
+
+  <br><hr><br>
+  <div style="text-align: center;">
+    <strong>Live Application:</strong> <a href="https://devtrack-system.onrender.com">https://devtrack-system.onrender.com</a><br>
+    <strong>GitHub Repository:</strong> <a href="https://github.com/monisha20070711-arch/devtrack-system">https://github.com/monisha20070711-arch/devtrack-system</a>
+  </div>
+
+</body>
+</html>

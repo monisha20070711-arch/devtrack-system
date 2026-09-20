@@ -253,6 +253,47 @@ const Issues = {
     });
   },
 
+  openAddDevModal() {
+    const form = document.getElementById('addDevForm');
+    if (form) form.reset();
+
+    const overlay = document.getElementById('addDevModalOverlay');
+    if (overlay) overlay.classList.add('active');
+  },
+
+  closeAddDevModal() {
+    const overlay = document.getElementById('addDevModalOverlay');
+    if (overlay) overlay.classList.remove('active');
+  },
+
+  async handleAddDevSubmit() {
+    const name = document.getElementById('newDevNameInput')?.value;
+    const email = document.getElementById('newDevEmailInput')?.value;
+    const role = document.getElementById('newDevRoleSelect')?.value;
+
+    if (!name || name.trim() === '') {
+      Toast.error('Please enter a developer name.');
+      return;
+    }
+
+    try {
+      const res = await API.post('/users', { name, email, role });
+      if (res && res.success) {
+        Toast.success(`Developer '${res.user.name}' added to roster!`);
+        this.closeAddDevModal();
+        await this.loadDevelopers();
+
+        // Auto-select newly added developer in dropdown if form is open
+        const assigneeSelect = document.getElementById('issueAssigneeSelect');
+        if (assigneeSelect) {
+          assigneeSelect.value = res.user.id;
+        }
+      }
+    } catch (err) {
+      // Handled by API toast
+    }
+  },
+
   setupEventListeners() {
     // Filter controls change listener
     const filterIds = ['filterStatusSelect', 'filterPrioritySelect', 'filterCategorySelect', 'sortSelect'];
@@ -271,12 +312,21 @@ const Issues = {
       };
     }
 
-    // Modal submit button
+    // Issue Modal submit button
     const form = document.getElementById('issueForm');
     if (form) {
       form.onsubmit = (e) => {
         e.preventDefault();
         this.handleFormSubmit();
+      };
+    }
+
+    // Add Developer Form submit
+    const devForm = document.getElementById('addDevForm');
+    if (devForm) {
+      devForm.onsubmit = (e) => {
+        e.preventDefault();
+        this.handleAddDevSubmit();
       };
     }
   },

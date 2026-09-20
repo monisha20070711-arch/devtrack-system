@@ -1,0 +1,296 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+  <meta charset="utf-8">
+  <title>DevTrack System – Complete Full-Stack Project Documentation</title>
+  <!--[if gte mso 9]>
+  <xml>
+    <w:WordDocument>
+      <w:View>Print</w:View>
+      <w:Zoom>100</w:Zoom>
+      <w:DoNotOptimizeForBrowser/>
+    </w:WordDocument>
+  </xml>
+  <![endif]-->
+  <style>
+    body {
+      font-family: 'Calibri', 'Arial', sans-serif;
+      font-size: 11pt;
+      line-height: 1.5;
+      color: #1a1a1a;
+      margin: 1in;
+    }
+    h1 {
+      font-size: 22pt;
+      color: #4338ca;
+      border-bottom: 2pt solid #6366f1;
+      padding-bottom: 4pt;
+      margin-top: 24pt;
+      margin-bottom: 12pt;
+      page-break-before: always;
+    }
+    h1.first-title {
+      page-break-before: avoid;
+    }
+    h2 {
+      font-size: 16pt;
+      color: #1e1b4b;
+      margin-top: 18pt;
+      margin-bottom: 8pt;
+    }
+    h3 {
+      font-size: 13pt;
+      color: #312e81;
+      margin-top: 14pt;
+      margin-bottom: 6pt;
+    }
+    p {
+      margin-bottom: 10pt;
+      text-align: justify;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12pt;
+      margin-bottom: 12pt;
+    }
+    th {
+      background-color: #4338ca;
+      color: #ffffff;
+      font-weight: bold;
+      padding: 8pt;
+      border: 1pt solid #3730a3;
+      text-align: left;
+    }
+    td {
+      padding: 7pt 8pt;
+      border: 1pt solid #cbd5e1;
+      vertical-align: top;
+    }
+    tr:nth-child(even) {
+      background-color: #f8fafc;
+    }
+    code {
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 9.5pt;
+      background-color: #f1f5f9;
+      padding: 2pt 4pt;
+      border: 1pt solid #e2e8f0;
+    }
+    pre {
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 9.5pt;
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 12pt;
+      border-radius: 4pt;
+      margin-top: 10pt;
+      margin-bottom: 10pt;
+      white-space: pre-wrap;
+    }
+    .cover {
+      text-align: center;
+      padding-top: 2in;
+      padding-bottom: 2in;
+    }
+    .cover-title {
+      font-size: 32pt;
+      font-weight: bold;
+      color: #4338ca;
+      margin-bottom: 12pt;
+    }
+    .cover-subtitle {
+      font-size: 16pt;
+      color: #64748b;
+      margin-bottom: 36pt;
+    }
+    .box {
+      background-color: #eeef444;
+      border-left: 4pt solid #6366f1;
+      background: #f8fafc;
+      padding: 10pt 14pt;
+      margin-top: 10pt;
+      margin-bottom: 10pt;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COVER PAGE -->
+  <div class="cover">
+    <div class="cover-title">DevTrack System</div>
+    <div class="cover-subtitle">Complete Full-Stack Project Documentation & Technical Interview Guide</div>
+    <br><br>
+    <table style="width: 70%; margin: 0 auto; text-align: left;">
+      <tr><td><strong>Author / Developer:</strong></td><td>Monisha</td></tr>
+      <tr><td><strong>Project Title:</strong></td><td>DevTrack System – Issue & Task Management System</td></tr>
+      <tr><td><strong>Tech Stack:</strong></td><td>Node.js, Express.js, MySQL, Vanilla JavaScript, HTML5, CSS3</td></tr>
+      <tr><td><strong>GitHub Repository:</strong></td><td>github.com/monisha20070711-arch/devtrack-system</td></tr>
+      <tr><td><strong>Live Application URL:</strong></td><td>https://devtrack-system.onrender.com</td></tr>
+    </table>
+  </div>
+
+  <h1 class="first-title">1. Project Overview</h1>
+  <p><strong>DevTrack System</strong> is a full-stack SaaS issue and task management web application designed for modern software development teams. The word <em>DevTrack</em> combines "Developer" and "Tracking", symbolizing continuous oversight of software bugs, feature requests, and system improvements across their entire lifecycle.</p>
+  <p>The primary purpose of DevTrack is to provide a single, centralized web dashboard where project managers, software engineers, and QA testers can create issues, assign tasks to specific developers, monitor status transitions (Open → In Progress → Resolved), evaluate priority levels (Low, Medium, High), and analyze distribution metrics through visual charts.</p>
+
+  <h1>2. Problem Statement</h1>
+  <p>Software development teams frequently face significant communication gaps and project delays caused by fragmented bug tracking. In traditional workflows, issues are reported across scattered emails, chat messages, or unorganized spreadsheets.</p>
+  <div class="box">
+    <strong>Official Problem Statement:</strong><br>
+    "Modern software projects require a centralized, secure, and real-time issue tracking system to eliminate unassigned bug backlogs, streamline developer assignment, enforce status transition visibility, and provide metrics-driven dashboard analytics for engineering teams."
+  </div>
+
+  <h1>3. Proposed Solution</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Traditional Problem</th>
+        <th>DevTrack Solution</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Scattered email/chat bug reports</td>
+        <td>Centralized issue database with unique issue IDs and metadata</td>
+      </tr>
+      <tr>
+        <td>Unclear task ownership</td>
+        <td>Explicit developer assignment linked to team user roster</td>
+      </tr>
+      <tr>
+        <td>Unknown bug resolution status</td>
+        <td>Strict Status badges (Open, In Progress, Resolved)</td>
+      </tr>
+      <tr>
+        <td>Difficulty prioritizing critical fixes</td>
+        <td>Priority tags (Low, Medium, High) with priority-based sorting</td>
+      </tr>
+      <tr>
+        <td>No workload metrics</td>
+        <td>Interactive Donut and Bar distribution charts powered by Chart.js</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h1>4. Technology Stack</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Technology</th>
+        <th>Purpose</th>
+        <th>Where Used</th>
+        <th>Why Selected</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>HTML5 & Vanilla CSS3</strong></td>
+        <td>Structure & Styling</td>
+        <td>Frontend (`index.html`, `style.css`)</td>
+        <td>Maximum performance, design flexibility, and glassmorphic UI control without framework overhead.</td>
+      </tr>
+      <tr>
+        <td><strong>Vanilla JavaScript (ES6+)</strong></td>
+        <td>Application Logic & DOM Manipulation</td>
+        <td>Frontend Modules (`app.js`, `issues.js`, `api.js`)</td>
+        <td>Demonstrates deep JavaScript fundamental skills (Async/Await, Fetch API, DOM event handling).</td>
+      </tr>
+      <tr>
+        <td><strong>Node.js & Express.js</strong></td>
+        <td>Server Runtime & REST API Framework</td>
+        <td>Backend (`server.js`, `controllers/`, `routes/`)</td>
+        <td>High-performance asynchronous I/O, lightweight middleware architecture, and clean routing.</td>
+      </tr>
+      <tr>
+        <td><strong>MySQL & mysql2/promise</strong></td>
+        <td>Relational Database Storage</td>
+        <td>Database (`config/db.js`, `models/`)</td>
+        <td>Strict relational integrity, SQL JOINs between users and issues, and connection pool optimization.</td>
+      </tr>
+      <tr>
+        <td><strong>JWT & bcryptjs</strong></td>
+        <td>Authentication & Security</td>
+        <td>Middleware & Controller (`authMiddleware.js`)</td>
+        <td>Stateless token authentication and industry-standard salted password hashing.</td>
+      </tr>
+      <tr>
+        <td><strong>Chart.js</strong></td>
+        <td>Visual Analytics Charts</td>
+        <td>Dashboard (`charts.js`)</td>
+        <td>Interactive Canvas rendering for Donut and Bar distribution charts.</td>
+      </tr>
+      <tr>
+        <td><strong>Render</strong></td>
+        <td>Cloud Hosting Platform</td>
+        <td>Deployment Target (`devtrack-system.onrender.com`)</td>
+        <td>Seamless GitHub integration, automated build pipelines, and production Node environment hosting.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h1>5. REST API Documentation</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Method</th>
+        <th>Endpoint</th>
+        <th>Auth?</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>POST</code></td><td><code>/api/auth/register</code></td><td>No</td><td>Registers a new user (Name, Email, Password, Role)</td></tr>
+      <tr><td><code>POST</code></td><td><code>/api/auth/login</code></td><td>No</td><td>Authenticates user and returns JWT token & profile</td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/auth/me</code></td><td>Yes</td><td>Fetches profile of currently logged-in user</td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/users</code></td><td>Yes</td><td>Lists all registered users for developer assignment</td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/issues</code></td><td>Yes</td><td>Lists issues (Supports search, status, priority, category, sortBy)</td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/issues/:id</code></td><td>Yes</td><td>Fetches detailed issue data with reporter & assignee JOINs</td></tr>
+      <tr><td><code>POST</code></td><td><code>/api/issues</code></td><td>Yes</td><td>Creates a new issue</td></tr>
+      <tr><td><code>PUT</code></td><td><code>/api/issues/:id</code></td><td>Yes</td><td>Updates existing issue fields</td></tr>
+      <tr><td><code>DELETE</code></td><td><code>/api/issues/:id</code></td><td>Yes</td><td>Deletes an issue permanently</td></tr>
+      <tr><td><code>GET</code></td><td><code>/api/dashboard/stats</code></td><td>Yes</td><td>Aggregates summary counts and chart distributions</td></tr>
+    </tbody>
+  </table>
+
+  <h1>6. Database Design</h1>
+  <pre>
+CREATE TABLE `users` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(150) NOT NULL UNIQUE,
+  `password` VARCHAR(255) NOT NULL,
+  `role` ENUM('Developer', 'Tester', 'Project Manager', 'Admin') NOT NULL DEFAULT 'Developer',
+  `avatar_url` VARCHAR(255) DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE `issues` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `title` VARCHAR(255) NOT NULL,
+  `description` TEXT,
+  `status` ENUM('Open', 'In Progress', 'Resolved') NOT NULL DEFAULT 'Open',
+  `priority` ENUM('Low', 'Medium', 'High') NOT NULL DEFAULT 'Medium',
+  `category` ENUM('Bug', 'Feature', 'Task', 'Improvement') NOT NULL DEFAULT 'Bug',
+  `reporter_id` INT DEFAULT NULL,
+  `assignee_id` INT DEFAULT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT `fk_issues_reporter` FOREIGN KEY (`reporter_id`) REFERENCES `users` (`id`) ON DELETE SET NULL,
+  CONSTRAINT `fk_issues_assignee` FOREIGN KEY (`assignee_id`) REFERENCES `users` (`id`) ON DELETE SET NULL
+);
+  </pre>
+
+  <h1>7. Interview Presentation & Elevator Pitch</h1>
+  <div class="box">
+    <strong>30-Second Interview Pitch:</strong><br>
+    "DevTrack is a production-style full-stack issue and task management system built with Node.js, Express, MySQL, and Vanilla Web technologies. It allows engineering teams to track bug lifecycles, assign tasks to developers, monitor status transitions, and analyze workload distributions via interactive charts. It features JWT authentication, bcrypt encryption, and is deployed live on Render."
+  </div>
+
+  <h1>8. Key Links for Employer Presentation</h1>
+  <ul>
+    <li><strong>Live Application URL:</strong> <a href="https://devtrack-system.onrender.com">https://devtrack-system.onrender.com</a></li>
+    <li><strong>GitHub Repository:</strong> <a href="https://github.com/monisha20070711-arch/devtrack-system">https://github.com/monisha20070711-arch/devtrack-system</a></li>
+  </ul>
+
+</body>
+</html>

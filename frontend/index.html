@@ -138,6 +138,9 @@
 
         <div class="header-right">
           <button id="themeToggleBtn" class="theme-toggle-btn" title="Toggle Light/Dark Mode"></button>
+          <button id="addDevBtn" class="btn-secondary" onclick="Issues.openAddDevModal()">
+            + Add Developer
+          </button>
           <button id="newIssueBtn" class="btn-primary" onclick="Issues.openCreateModal()">
             <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
             New Issue
@@ -366,7 +369,10 @@
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="issueAssigneeSelect">Assignee Developer</label>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                <label class="form-label" for="issueAssigneeSelect" style="margin-bottom:0;">Assignee Developer</label>
+                <a href="#" style="font-size: 0.775rem; font-weight: 700;" onclick="event.preventDefault(); Issues.openAddDevModal();">+ New Developer Name</a>
+              </div>
               <select id="issueAssigneeSelect" class="form-control">
                 <option value="">-- Unassigned --</option>
               </select>
@@ -439,6 +445,45 @@
         <button id="confirmModalCancelBtn" class="btn-secondary">Cancel</button>
         <button id="confirmModalActionBtn" class="btn-danger">Confirm</button>
       </div>
+    </div>
+  </div>
+
+
+  <!-- Modal 4: Add Developer Name -->
+  <div id="addDevModalOverlay" class="modal-overlay">
+    <div class="modal-card" style="max-width: 480px;">
+      <div class="modal-header">
+        <h3 class="modal-title">Add New Developer / Team Member</h3>
+        <button class="modal-close" onclick="Issues.closeAddDevModal()">✕</button>
+      </div>
+
+      <form id="addDevForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label" for="newDevNameInput">Developer Full Name *</label>
+            <input type="text" id="newDevNameInput" class="form-control" placeholder="e.g. Rahul Kumar" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="newDevEmailInput">Email Address (Optional)</label>
+            <input type="email" id="newDevEmailInput" class="form-control" placeholder="e.g. rahul@devtrack.io (Auto-generated if left blank)">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="newDevRoleSelect">Role</label>
+            <select id="newDevRoleSelect" class="form-control">
+              <option value="Developer" selected>Developer</option>
+              <option value="Tester">QA Tester</option>
+              <option value="Project Manager">Project Manager</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="Issues.closeAddDevModal()">Cancel</button>
+          <button type="submit" class="btn-primary">Add Developer</button>
+        </div>
+      </form>
     </div>
   </div>
 
